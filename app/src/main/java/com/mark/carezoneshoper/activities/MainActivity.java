@@ -139,11 +139,12 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,uri,jsonObject, response, errorListener){
-            @Override
-                    public String getBodyContentType() {
-                        return "application/json; charset=utf-8";
-                    }
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,uri,jsonObject, response, errorListener){
+//            @Override
+//                    public String getBodyContentType() {
+//                        return "application/json; charset=utf-8";
+//                    }
         };
 
         mEDTNewCategorieField.setText(test + "\n" + request.toString());
