@@ -15,15 +15,12 @@ import org.json.JSONObject;
  */
 public class VolleySingleton {
     private RequestQueue mRequestQueue;
-    private JsonObjectRequest mJsonObjectRequest;
-    private static Context mContext;
-    public static final String APIKEY = "5K5u2pTzkvFiU7ChfgKy";
 
+    private static Context mContext;
 
     private VolleySingleton(Context context){
         mContext = context;
         mRequestQueue = Volley.newRequestQueue(mContext.getApplicationContext());
-        //mJsonObjectRequest
     }
 
     public static synchronized VolleySingleton getInstance( ){
@@ -35,15 +32,11 @@ public class VolleySingleton {
         return mRequestQueue;
     }
 
-
-
-
-
-
     private static class Holder{
         private static VolleySingleton mInstance =
                 new VolleySingleton(MyApplication.getAppContext());
     }
+
 
 
 
