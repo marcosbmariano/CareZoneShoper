@@ -79,74 +79,14 @@ public class MainActivity extends AppCompatActivity {
 //        requestQueue.add(VolleyHelper.getPutRequest(1294, getJsonObject(),
 //                getJsonResponse(), getErrorResponse()));
 
-        requestQueue.add(VolleyHelper.getGetArrayRequest(getJsonArrayResponse(), getErrorResponse()));
-        requestQueue.add(VolleyHelper.getGetSingleRequest(1294, getJsonResponse(), getErrorResponse()));
+       // requestQueue.add(VolleyHelper.getGetArrayRequest(getJsonArrayResponse(), getErrorResponse()));
+       // requestQueue.add(VolleyHelper.getGetSingleRequest(1294, getJsonResponse(), getErrorResponse()));
     }
 
 
 
 
 
-    private Response.Listener<JSONObject> getJsonResponse(){
-        return new Response.Listener<JSONObject>(){
-            @Override
-            public void onResponse(JSONObject response) {
-                Toast.makeText(MainActivity.this.getApplicationContext(),
-                        "Worked \n"  , Toast.LENGTH_LONG).show();
-                if ( response != null){
-                    mEDTNewCategorieField.setText(response.toString());
-                }
-
-            }
-        };
-
-    }
-
-    private Response.Listener<JSONArray> getJsonArrayResponse(){
-        return new Response.Listener<JSONArray>(){
-            @Override
-            public void onResponse(JSONArray response) {
-
-
-                response.length();
-
-                if ( response != null){
-                    mEDTNewCategorieField.setText(response.toString());
-                }
-
-            }
-        };
-
-    }
-
-
-
-    private Response.Listener<String> getStringResponse() {
-        return new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(MainActivity.this.getApplicationContext(),
-                        "Worked \n", Toast.LENGTH_LONG).show();
-                if (response != null) {
-                    mEDTNewCategorieField.setText(response.toString());
-                }
-
-            }
-        };
-    }
-
-    private Response.ErrorListener getErrorResponse(){
-        return new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this.getApplicationContext(),
-                        "Failed \n" , Toast.LENGTH_LONG).show();
-
-                mEDTNewCategorieField.setText(test + "\n" + error.toString());
-
-            }
-        };
-    }
 
 
 

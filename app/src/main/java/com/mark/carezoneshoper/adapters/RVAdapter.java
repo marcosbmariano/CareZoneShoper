@@ -18,9 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.mark.carezoneshoper.R;
 import com.mark.carezoneshoper.fragments.InternalRVFragment;
 import com.mark.carezoneshoper.models.Category;
+import com.mark.carezoneshoper.networkHelper.VolleyHelper;
+import com.mark.carezoneshoper.singletons.VolleySingleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +33,11 @@ import java.util.List;
  * Created by mark on 12/6/15.
  */
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HV>{
-    private static List<Category> list ;
+    private static List<Category> list = new ArrayList<>();
 
     static{
-        list = Category.getCategories();
+        Category.getCategories();
+        list = Category.getCategoriesFromDB();
     }
 
 
@@ -47,7 +51,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HV>{
 
     @Override
     public void onBindViewHolder(HV holder, int position) {
-        holder.setLabel(list.get(position).getName());
+        holder.setLabel(list.get(position).getCategory());
         holder.setCategory(list.get(position));
     }
 
@@ -96,6 +100,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HV>{
                         toogle = true;
                         addFragmentList();
                     }
+                }
+            });
+
+            v.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    //delete
+                    return true;
                 }
             });
         }
