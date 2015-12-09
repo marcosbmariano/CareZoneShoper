@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.mark.carezoneshoper.R;
 import com.mark.carezoneshoper.adapters.RVAdapter;
+import com.mark.carezoneshoper.models.Category;
 
 /**
  * Created by mark on 12/6/15.
@@ -36,7 +37,9 @@ public class RecyclerVFragment extends Fragment {
     }
 
     public void addItem(String s){
-        mAdapter.addItem(s);
+        Category cat = new Category(s);
+        cat.save();
+        mAdapter.addCategory(cat);
         mAdapter.notifyDataSetChanged();
     }
 }

@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.mark.carezoneshoper.R;
 import com.mark.carezoneshoper.adapters.GategoriesAdapter;
+import com.mark.carezoneshoper.models.Category;
+import com.mark.carezoneshoper.models.Item;
 
 
 /**
@@ -24,6 +26,7 @@ public class InternalRVFragment extends Fragment {
     private EditText edtNewItemField;
     private Button btnAddNewItem;
     private GategoriesAdapter mAdapter;
+    private Category mCategory;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -32,14 +35,18 @@ public class InternalRVFragment extends Fragment {
 
         setupRecycler(rootView);
         setupWidgets(rootView);
-
         return rootView;
+    }
+
+    public void addCategory(Category cat){
+        mCategory = cat;
     }
 
     private void setupRecycler(View v){
         mRecyclerView = (RecyclerView)v.findViewById(R.id.rvCategoriesList);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         mAdapter = new GategoriesAdapter();
+        mAdapter.setList(mCategory.getItems());
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -51,11 +58,12 @@ public class InternalRVFragment extends Fragment {
         btnAddNewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = edtNewItemField.getText().toString();
+                String itemName = edtNewItemField.getText().toString();
                 edtNewItemField.setText("");
-                mAdapter.addItem(text);
+                mAdapter.setCategory(mCategory);
+                mCategory.addItem(itemName);
+                mAdapter.setList(mCategory.getItems());
                 mAdapter.notifyDataSetChanged();
-
             }
         });
 

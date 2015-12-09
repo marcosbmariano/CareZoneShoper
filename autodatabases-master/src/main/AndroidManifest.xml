@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.marcos.autodatabases">
+       <!-- <meta-data
+            android:name="AA_DB_NAME"
+            android:value="MY_DATABASE.db"
+            />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1"
+            /> -->
+
+
+</manifest>

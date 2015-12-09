@@ -1,6 +1,7 @@
 package com.mark.carezoneshoper.activities;
 
 import android.app.DownloadManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +11,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.mark.carezoneshoper.R;
 import com.mark.carezoneshoper.fragments.RecyclerVFragment;
 import com.mark.carezoneshoper.networkHelper.VolleyHelper;
@@ -28,10 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerVFragment mRecView;
@@ -43,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupWidgets();
+
+
+
     }
 
 
@@ -57,13 +54,16 @@ public class MainActivity extends AppCompatActivity {
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mRecView.addItem(mEDTNewCategorieField.getText().toString());
-                // mEDTNewCategorieField.setText("");
-                setRequest();
+                mRecView.addItem(mEDTNewCategorieField.getText().toString());
+                mEDTNewCategorieField.setText("");
+                //setRequest();
             }
         });
     }
-    String test;
+
+
+
+    String test; //TODO remove this
     private void setRequest() {
 
         RequestQueue requestQueue = VolleySingleton.getInstance().getRequestQueue();
@@ -85,22 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private JSONObject getJsonObject(){
-
-        String input = "{item:{name: Coca-cola, category : Beverages}}";
-        JSONObject result = null;
-        try {
-            result = new JSONObject(input);
-            test = result.toString();
-        } catch (JSONException e) {
-
-            Toast.makeText(MainActivity.this.getApplicationContext(),
-                    "Json Failed", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-
-        return result;
-    }
 
 
     private Response.Listener<JSONObject> getJsonResponse(){
@@ -122,8 +106,10 @@ public class MainActivity extends AppCompatActivity {
         return new Response.Listener<JSONArray>(){
             @Override
             public void onResponse(JSONArray response) {
-                Toast.makeText(MainActivity.this.getApplicationContext(),
-                        "Worked \n"  , Toast.LENGTH_LONG).show();
+
+
+                response.length();
+
                 if ( response != null){
                     mEDTNewCategorieField.setText(response.toString());
                 }

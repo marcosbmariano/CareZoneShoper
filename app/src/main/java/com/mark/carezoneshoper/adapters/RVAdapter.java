@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.mark.carezoneshoper.R;
 import com.mark.carezoneshoper.fragments.InternalRVFragment;
+import com.mark.carezoneshoper.models.Category;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,11 @@ import java.util.List;
  * Created by mark on 12/6/15.
  */
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HV>{
-    private List<String> list = new ArrayList<>();
+    private static List<Category> list ;
+
+    static{
+        list = Category.getCategories();
+    }
 
 
     @Override
@@ -39,9 +44,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HV>{
         return new HV(v, parent.getContext());
     }
 
+
     @Override
     public void onBindViewHolder(HV holder, int position) {
-        holder.setLabel(list.get(position));
+        holder.setLabel(list.get(position).getName());
+        holder.setCategory(list.get(position));
     }
 
     @Override
@@ -49,8 +56,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HV>{
         return list.size();
     }
 
-    public void addItem(String s){
-        list.add(s);
+
+    public void addCategory( Category cat){
+        list.add(cat);
     }
 
 
@@ -60,6 +68,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HV>{
         private static Context context;
         private boolean toogle = false;
         private FrameLayout newFrameLayout;
+        private Category category;
 
 
         public HV(View itemView, Context context) {
@@ -68,6 +77,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HV>{
             this.itemView = itemView;
             setupViews(itemView);
 
+        }
+
+        public void setCategory( Category cat){
+            category = cat;
         }
 
         private void setupViews(View v){
@@ -91,7 +104,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.HV>{
             int id = View.generateViewId();
             newFrameLayout = getNewFrameLayout(context, id);
             addViewToLayout(newFrameLayout);
-            addFragment(id, new InternalRVFragment());
+            InternalRVFragment intFrag = new InternalRVFragment();
+            intFrag.addCategory(category);
+            addFragment(id, intFrag);
             itemView.getLayoutParams().height = getHeightInDP(300);
         }
 
