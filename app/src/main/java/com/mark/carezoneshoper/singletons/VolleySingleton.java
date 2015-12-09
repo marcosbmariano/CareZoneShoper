@@ -23,7 +23,7 @@ public class VolleySingleton {
         mRequestQueue = Volley.newRequestQueue(mContext.getApplicationContext());
     }
 
-    public static synchronized VolleySingleton getInstance( ){
+    public static VolleySingleton getInstance( ){
         return Holder.mInstance;
 
     }
