@@ -9,16 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 
 import com.mark.carezoneshoper.R;
 import com.mark.carezoneshoper.adapters.GategoriesAdapter;
 import com.mark.carezoneshoper.models.Category;
-import com.mark.carezoneshoper.models.Item;
-
 
 /**
  * Created by mark on 12/6/15.
+ * This fragment is responsible to handle all the items for each category
+ *
  */
 public class InternalRVFragment extends Fragment {
 
@@ -66,9 +66,6 @@ public class InternalRVFragment extends Fragment {
                 mAdapter.notifyDataSetChanged();
             }
         });
-
-
-
 
     }
 }

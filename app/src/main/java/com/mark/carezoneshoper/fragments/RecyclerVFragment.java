@@ -14,6 +14,8 @@ import com.mark.carezoneshoper.models.Category;
 
 /**
  * Created by mark on 12/6/15.
+ *
+ * this fragment is responsible to handle all categories
  */
 public class RecyclerVFragment extends Fragment {
     private RecyclerView mRecyclerView;
